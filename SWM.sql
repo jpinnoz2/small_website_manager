@@ -94,8 +94,13 @@ CREATE TABLE `Globals` (
 
 INSERT INTO `Globals` (`Global`, `Value`) VALUES
 ('Website Name', 'Small Website Manager'),
-('URL', 'https://www.joepinzone.com'),
-('Site Email Address', 'jpinnoz@yahoo.com');
+('URL', '127.0.0.1'),
+('Site Email Address', 'your_email_address1@yahoo.com');
+
+-- INSERT INTO `Globals` (`Global`, `Value`) VALUES
+-- ('Website Name', 'Small Website Manager'),
+-- ('URL', 'https://www.joepinzone.com'),
+-- ('Site Email Address', 'jpinnoz@yahoo.com');
 
 -- --------------------------------------------------------
 
