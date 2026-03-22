@@ -1,0 +1,11 @@
+Thread ID >> Page ID
+Sub_Thread ID >> Page Iteration
+Active
+
+Delete Active in Cust_Pages
+
+Message use global var
+Note: user names column would be nice
+
+Nav bar links
+Hide instead of delete
