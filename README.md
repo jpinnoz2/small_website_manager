@@ -5,6 +5,8 @@ INSTALLATION INSTRUCTIONS
 
 Copy all the files except SWM.SQL and README.MD into your web directory
 
+Edit SWM.SQL and modify the email address data for the admin.
+
 Import the database from SWM.SQL using phpMyAdmin or whatever you like
 
 db_connect.inc has the database connection settings in it.
