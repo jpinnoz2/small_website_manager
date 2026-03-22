@@ -277,9 +277,17 @@ CREATE TABLE `Users` (
 -- Dumping data for table `Users`
 --
 
+-- INSERT INTO `Users` (`ID`, `First_Name`, `Last_Name`, `eMail`, `User_Name`, `Password`, `Activate_Pass`, `Change_Pass`, `Change_Pass_Expire`, `Forgot_Pass`, `Forgot_Pass_Expire`, `DateTime_Joined`, `Last_Logged`, `Authority_Level`, `Active`) VALUES
+-- (35, 'First_Name', 'Family_Name', 'jpinnoz@yahoo.com', 'admin2', '$2y$10$eZK.6hAn.eqdDx1uuKU/tee4jzLRWzknnCgvsNN7DQh9rM20V4Zey', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-05-29 18:26:25', 3, 1),
+-- (37, 'First Name', 'Last Name', 'jpinnoz@gmail.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-06-15 20:06:05', 3, 1);
+
+--
+-- Alter your email address below
+--
+
 INSERT INTO `Users` (`ID`, `First_Name`, `Last_Name`, `eMail`, `User_Name`, `Password`, `Activate_Pass`, `Change_Pass`, `Change_Pass_Expire`, `Forgot_Pass`, `Forgot_Pass_Expire`, `DateTime_Joined`, `Last_Logged`, `Authority_Level`, `Active`) VALUES
-(35, 'First_Name', 'Family_Name', 'jpinnoz@yahoo.com', 'admin2', '$2y$10$eZK.6hAn.eqdDx1uuKU/tee4jzLRWzknnCgvsNN7DQh9rM20V4Zey', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-05-29 18:26:25', 3, 1),
-(37, 'First Name', 'Last Name', 'jpinnoz@gmail.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-06-15 20:06:05', 3, 1);
+(35, 'First_Name', 'Family_Name', 'your_email_address1@yahoo.com', 'admin2', '$2y$10$eZK.6hAn.eqdDx1uuKU/tee4jzLRWzknnCgvsNN7DQh9rM20V4Zey', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-05-29 18:26:25', 3, 1),
+(37, 'First Name', 'Last Name', 'your_email_address2@gmail.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-06-15 20:06:05', 3, 1);
 
 --
 -- Indexes for dumped tables
