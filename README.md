@@ -1,6 +1,15 @@
+Small Website Manager
+
+INSTALLATION INSTRUCTIONS
+=========================
+
 Copy all the files except SWM.SQL and README.MD into your web directory
 
 Import the database from SWM.SQL using phpMyAdmin or whatever you like
+
+db_connect.inc has the database connection settings in it.
+
+Navigate to the website directory (online) in your web browser.
 
 The username is admin and the password is blubber2
 
