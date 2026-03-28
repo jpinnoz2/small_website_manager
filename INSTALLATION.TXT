@@ -1,0 +1,78 @@
+>>Installation instructions for Debian Linux Home Server Setup<<
+
+I recommend installing Synaptic Package Manager first
+
+$ sudo apt install synaptic
+
+Run synaptic, enter your password, then select the packages for installation:
++ apache (web server)
++ php (scripting engine)
++ mysql or mariadb if unavailable (database)
++ php-mysql (classes for compatibility)
+
+Just run a search in synaptic for each… Don't forget to actually install!
+It's a one button press…
+
+Do the following after Apache is installed:
+===========
+$ sudo adduser mylinuxusername www-data
+
+$ sudo chgrp -hR www-data /var/www
+
+$ sudo chmod -R 775 /var/www
+
+>> Next Restart Apache or restart Linux <<
+
+$ sudo /etc/init.d/apache2 restart
+
+$ sudo ls -l /var/www/html
+
+>> Make sure the file permissions have changed <<
+
+$ sudo mysql
+
+mysql> CREATE DATABASE SWM;
+
+mysql> USE SWM;
+
+mysql> CREATE USER 'newmysqlusername'@'localhost' IDENTIFIED BY 'password123';
+
+mysql> GRANT ALL PRIVILEGES ON SWM.* TO 'newmysqlusername'@'localhost' WITH GRANT OPTION;
+
+mysql> FLUSH PRIVILEGES;
+
+mysql> EXIT
+===========
+
+I recommend downloading phpMyAdmin and copying it to /var/www/html/phpMyAdmin
+Don't forget to extract the directory first You should then be able to access it
+from localhost/phpMyAdmin in your Web browser when Apache is running Using phpMyAdmin
+you can import the database.
+
+If you don't have a domain name for sending emails you can make a
+https://www.gmail.com eMail account (set a special 16 digit password)
+and then install and use ssmtp on your Debian Linux home server:
+===========
+$ sudo apt-get install ssmtp
+
+$ sudo nano /etc/ssmtp/ssmtp.conf
+
+#root=yourgmailaddress@gmail.com
+
+mailhub=smtp.gmail.com:587
+
+FromLineOverride=YES
+
+AuthUser=yourgmailaddress@gmail.com
+
+AuthPass=enteryourspecialgmail16digitpassword
+
+FromLineOverride=YES
+
+UseSTARTTLS=YES
+
+hostname=localhost
+===========
+
+Save the .conf file using the CONTROL+O key combo, then CONTROL+X to exit to the
+command line shell… and you are good to send emails for authentication.
