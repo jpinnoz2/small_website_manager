@@ -1,3 +1,5 @@
+Switch from bbcode to MediaWiki tags
+
 Thread ID >> Page ID
 Sub_Thread ID >> Page Iteration
 Active
