@@ -1,5 +1,7 @@
 Switch from bbcode to MediaWiki tags
 
+Browser detect if viewed on a mobile phone
+
 Thread ID >> Page ID
 Sub_Thread ID >> Page Iteration
 Active
