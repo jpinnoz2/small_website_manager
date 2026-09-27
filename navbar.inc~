@@ -17,7 +17,7 @@ while($row2 = mysqli_fetch_assoc($result2))
 {
 	$menuEntry2 = $row2['Default Menu Title'];
 	$pageTitle2 = $row2['LinkData'];
-	$pageTitle2 = preg_replace('/ /', '_', $pageTitle2);
+	$pageTitle2 = preg_replace('/ /', '_', $pageTitle);
 	echo "<a href='$pageTitle2'>$menuEntry2</a>\r\n";
 }
 

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2024 at 07:48 AM
--- Server version: 10.11.6-MariaDB-0+deb12u1
--- PHP Version: 8.2.7
+-- Generation Time: Sep 27, 2026 at 04:19 PM
+-- Server version: 11.8.6-MariaDB-0+deb13u1 from Debian
+-- PHP Version: 8.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `SWM`
 --
-CREATE DATABASE IF NOT EXISTS `SWM` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `SWM`;
 
 -- --------------------------------------------------------
 
@@ -52,7 +50,11 @@ INSERT INTO `Cust_Pages` (`Page_ID`, `Page_Iteration`, `Parent_Iteration`, `Titl
 (2, 5, 4, 'Page 2', 'Testaroo! Double Yeah!', '2024-05-19 13:42:06', 35),
 (3, 1, 0, 'Page 3', 'Testin!', '2024-05-19 13:29:44', 35),
 (4, 1, 0, 'Page 4', 'Page 4', '2024-05-19 13:35:50', 35),
-(5, 1, 0, 'Page 5', 'Batman was here!', '2024-06-12 19:00:20', 37);
+(5, 1, 0, 'Page 5', 'Batman was here!', '2024-06-12 19:00:20', 37),
+(6, 1, 0, 'Page 6', 'Just testin', '2026-09-27 12:26:07', 37),
+(7, 1, 0, 'Page 7', 'lovely weather were having today', '2026-09-27 13:59:02', 37),
+(8, 1, 0, 'Page8', 'Test', '2026-09-27 17:59:06', 37),
+(9, 1, 0, 'Page 1', 'Test', '2026-09-28 02:09:15', 37);
 
 -- --------------------------------------------------------
 
@@ -75,7 +77,11 @@ INSERT INTO `Cust_Pages_DATA` (`Page_ID`, `Page_Iteration`, `Active`) VALUES
 (2, 5, 1),
 (3, 1, 1),
 (4, 1, 1),
-(5, 1, 0);
+(5, 1, 0),
+(6, 1, 1),
+(7, 1, 1),
+(8, 1, 1),
+(9, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -96,11 +102,6 @@ INSERT INTO `Globals` (`Global`, `Value`) VALUES
 ('Website Name', 'Small Website Manager'),
 ('URL', '127.0.0.1'),
 ('Site Email Address', 'your_email_address1@yahoo.com');
-
--- INSERT INTO `Globals` (`Global`, `Value`) VALUES
--- ('Website Name', 'Small Website Manager'),
--- ('URL', 'https://www.joepinzone.com'),
--- ('Site Email Address', 'jpinnoz@yahoo.com');
 
 -- --------------------------------------------------------
 
@@ -187,10 +188,7 @@ CREATE TABLE `SubMenus` (
 
 INSERT INTO `SubMenus` (`MenuID`, `LinkID`, `Page_ID`, `Menu_Entry`, `Title`, `Active`) VALUES
 (1, 1, 1, 'Home', 'index.php', 1),
-(1, 2, 2, 'Page 2.1', 'index.php?page=Page 2', 1),
-(1, 3, 3, 'Page 3', 'index.php?page=Page 3', 1),
-(1, 4, 4, 'Page 4', 'index.php?page=Page 4', 1),
-(1, 5, 5, 'Page 5', 'index.php?page=Page 5', 0);
+(1, 2, 9, 'Page 1', 'index.php?page=Page 1', 1);
 
 -- --------------------------------------------------------
 
@@ -202,17 +200,18 @@ CREATE TABLE `SubMenusData` (
   `Type` varchar(500) NOT NULL,
   `Default Menu Title` varchar(20) NOT NULL,
   `LinkData` text NOT NULL,
-  `GetData` tinyint(1) NOT NULL
+  `GetData` tinyint(1) NOT NULL,
+  `Module_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `SubMenusData`
 --
 
-INSERT INTO `SubMenusData` (`Type`, `Default Menu Title`, `LinkData`, `GetData`) VALUES
-('Custom Page', 'New Page', 'index.php?page=', 1),
-('Forums Module', 'Forums', 'forums.php', 0),
-('News Module', 'News', 'news.php', 0);
+INSERT INTO `SubMenusData` (`Type`, `Default Menu Title`, `LinkData`, `GetData`, `Module_ID`) VALUES
+('Custom Page', 'New Page', 'index.php?page=', 1, 0),
+('Forums Module', 'Forums', 'forums.php', 0, 2),
+('News Module', 'News', 'news.php', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -240,7 +239,29 @@ INSERT INTO `SubMenus_BACKUP` (`Page_ID`, `Page_Iteration`, `Menu_ID`, `Link_ID`
 (3, 1, 1, 3, 'Page 3', 'index.php?page=Page 3'),
 (4, 1, 1, 4, 'Page 4', 'index.php?page=Page 4'),
 (2, 5, 1, 5, 'Page 2.1', 'index.php?page=Page 2'),
-(5, 1, 1, 5, 'Page 5', 'index.php?page=Page 5');
+(5, 1, 1, 5, 'Page 5', 'index.php?page=Page 5'),
+(6, 1, 1, 6, 'Page 6', 'index.php?page=Page 6'),
+(7, 1, 1, 7, 'Page 7', 'index.php?page=Page 7'),
+(8, 1, 1, 9, 'Page8', 'index.php?page=Page8'),
+(9, 1, 1, 2, 'Page 1', 'index.php?page=Page 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `SubMenus_Modules`
+--
+
+CREATE TABLE `SubMenus_Modules` (
+  `SubMenu_Order` int(11) NOT NULL,
+  `Module_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `SubMenus_Modules`
+--
+
+INSERT INTO `SubMenus_Modules` (`SubMenu_Order`, `Module_ID`) VALUES
+(14, 1);
 
 -- --------------------------------------------------------
 
@@ -282,17 +303,9 @@ CREATE TABLE `Users` (
 -- Dumping data for table `Users`
 --
 
--- INSERT INTO `Users` (`ID`, `First_Name`, `Last_Name`, `eMail`, `User_Name`, `Password`, `Activate_Pass`, `Change_Pass`, `Change_Pass_Expire`, `Forgot_Pass`, `Forgot_Pass_Expire`, `DateTime_Joined`, `Last_Logged`, `Authority_Level`, `Active`) VALUES
--- (35, 'First_Name', 'Family_Name', 'jpinnoz@yahoo.com', 'admin2', '$2y$10$eZK.6hAn.eqdDx1uuKU/tee4jzLRWzknnCgvsNN7DQh9rM20V4Zey', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-05-29 18:26:25', 3, 1),
--- (37, 'First Name', 'Last Name', 'jpinnoz@gmail.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-06-15 20:06:05', 3, 1);
-
---
--- Alter your email address below
---
-
 INSERT INTO `Users` (`ID`, `First_Name`, `Last_Name`, `eMail`, `User_Name`, `Password`, `Activate_Pass`, `Change_Pass`, `Change_Pass_Expire`, `Forgot_Pass`, `Forgot_Pass_Expire`, `DateTime_Joined`, `Last_Logged`, `Authority_Level`, `Active`) VALUES
-(35, 'First_Name', 'Family_Name', 'your_email_address1@yahoo.com', 'admin2', '$2y$10$eZK.6hAn.eqdDx1uuKU/tee4jzLRWzknnCgvsNN7DQh9rM20V4Zey', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-05-29 18:26:25', 3, 1),
-(37, 'First Name', 'Last Name', 'your_email_address2@gmail.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-06-15 20:06:05', 3, 1);
+(35, 'First_Name', 'Family_Name', 'jpinnoz@gmail.com', 'admin2', '$2y$10$eZK.6hAn.eqdDx1uuKU/tee4jzLRWzknnCgvsNN7DQh9rM20V4Zey', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-05-29 18:26:25', 3, 1),
+(37, 'First Name', 'Last Name', 'jpinnoz@yahoo.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$12$DqhUjYWqUHk/0QI0CB7m4.Xt0lR5tfY4zVUR/tHdusDD91JESt0TG', '2026-09-27 13:53:04', NULL, NULL, '2024-04-02 20:52:43', '2026-09-28 01:52:29', 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -326,6 +339,12 @@ ALTER TABLE `SubMenus`
   ADD KEY `MenuID` (`MenuID`,`LinkID`);
 
 --
+-- Indexes for table `SubMenus_Modules`
+--
+ALTER TABLE `SubMenus_Modules`
+  ADD PRIMARY KEY (`SubMenu_Order`);
+
+--
 -- Indexes for table `Username_Change_Log`
 --
 ALTER TABLE `Username_Change_Log`
@@ -348,7 +367,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Cust_Pages`
 --
 ALTER TABLE `Cust_Pages`
-  MODIFY `Page_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Page_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `News`
@@ -361,6 +380,12 @@ ALTER TABLE `News`
 --
 ALTER TABLE `News_Comments`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `SubMenus_Modules`
+--
+ALTER TABLE `SubMenus_Modules`
+  MODIFY `SubMenu_Order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `Users`
