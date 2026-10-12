@@ -21,8 +21,10 @@ while($row2 = mysqli_fetch_assoc($result2))
 	echo "<a href='$pageTitle2'>$menuEntry2</a>\r\n";
 }
 
-if ($_SESSION['auth_lev'] == 3 AND isset($_SESSION['first_name']) AND isset($_SESSION['user_name']) ) {
-	echo "<a class='newpage' href='newpage.php'>[New Page]</a>\r\n";
+if (isset($_SESSION['auth_lev'])){
+	if ($_SESSION['auth_lev'] == 3 AND isset($_SESSION['first_name']) AND isset($_SESSION['user_name']) ) {
+		echo "<a class='newpage' href='newpage.php'>[New Page]</a>\r\n";
+	}
 }
 ?>
 </nav>

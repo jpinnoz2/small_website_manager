@@ -1,0 +1,16 @@
+<?php
+
+//$loader = require __DIR__ . '/home/joe/vendor/autoload.php';
+//$loader->addPsr4('Acme\\Test\\', __DIR__);
+require __DIR__ . '/home/joe/vendor/autoload.php';
+
+use League\CommonMark\CommonMarkConverter;
+
+echo "<html><body>";
+
+$converter = new CommonMarkConverter();
+echo $converter->convert('# Hello World!');
+
+// <h1>Hello World!</h1>
+echo "</body></html>";
+?>

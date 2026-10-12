@@ -1,11 +1,13 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode']=="Log_Out") {
 	session_destroy();
 	unset($_SESSION);
 }
-session_start();
+
 ?>
 
 <!DOCTYPE html>
