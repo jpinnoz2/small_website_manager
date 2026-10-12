@@ -41,6 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode']=="User_Details
 	}
 }
 
+if (!isset($ffirstname_style)) {
+	$ffirstname_style = "";
+}
+if (!isset($flastname_style)) {
+	$flastname_style = "";
+}
+
 if (isset($_SESSION['user_name'])) {
 
 	$userName = $_SESSION['user_name'];
@@ -50,7 +57,13 @@ if (isset($_SESSION['user_name'])) {
 	$firstName = $row1['First_Name'];
 	$lastName = $row1['Last_Name'];
 
-	echo "$message\r\n
+	if (isset($message)) {
+		echo "$message\r\n";
+	}
+	
+	
+	
+	echo "
 	<h3>User Details</h3>\r\n
 	<div>\r\n
 	<form action='".htmlentities($_SERVER['PHP_SELF'])."' method='post'>\r\n

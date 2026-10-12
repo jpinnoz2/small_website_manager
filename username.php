@@ -47,8 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode']=="User_Name" A
 if (isset($_SESSION['user_name'])) {
 	$userName = $_SESSION['user_name'];
 
-	echo "$errormessage\n\r
-	<h3>User Name</h3>\n\r
+	if (isset($errormessage)) {
+		echo "$errormessage\n\r";
+	}
+	echo "<h3>User Name</h3>\n\r
 	<div>\n\r
 	<form action='".htmlentities($_SERVER['PHP_SELF'])."' method='post'>\n\r
 	<table>\n\r

@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode']=="Temp_Pass") 
 		die();
 	}
 
-} elseif ($_GET['username'] AND $_GET['temppass']) {
+} elseif (isset($_GET['username']) AND isset($_GET['temppass'])) {
 	
 	$userName = $_GET['username'];
 	$query1 = "SELECT `Change_Pass`, `Change_Pass_Expire` FROM `Users` WHERE `User_Name`='{$userName}'";
