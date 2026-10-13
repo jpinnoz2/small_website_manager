@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 27, 2026 at 04:19 PM
+-- Generation Time: Oct 13, 2026 at 09:44 PM
 -- Server version: 11.8.6-MariaDB-0+deb13u1 from Debian
 -- PHP Version: 8.4.26
 
@@ -43,18 +43,7 @@ CREATE TABLE `Cust_Pages` (
 
 INSERT INTO `Cust_Pages` (`Page_ID`, `Page_Iteration`, `Parent_Iteration`, `Title`, `Body`, `Last_Modified`, `Last_Author`) VALUES
 (1, 1, 0, 'Welcome', 'This is the homepage!', '2024-05-17 17:21:52', 35),
-(2, 1, 0, 'Page 2', 'Testaroo!', '2024-05-17 17:29:01', 35),
-(2, 2, 1, 'Page 2', 'Version 2', '2024-05-17 17:29:32', 35),
-(2, 3, 1, 'Page 2', 'Testaroo! Testaroo!', '2024-05-17 17:29:54', 35),
-(2, 4, 1, 'Page 2', 'Testaroo! Yeah!', '2024-05-18 10:49:34', 35),
-(2, 5, 4, 'Page 2', 'Testaroo! Double Yeah!', '2024-05-19 13:42:06', 35),
-(3, 1, 0, 'Page 3', 'Testin!', '2024-05-19 13:29:44', 35),
-(4, 1, 0, 'Page 4', 'Page 4', '2024-05-19 13:35:50', 35),
-(5, 1, 0, 'Page 5', 'Batman was here!', '2024-06-12 19:00:20', 37),
-(6, 1, 0, 'Page 6', 'Just testin', '2026-09-27 12:26:07', 37),
-(7, 1, 0, 'Page 7', 'lovely weather were having today', '2026-09-27 13:59:02', 37),
-(8, 1, 0, 'Page8', 'Test', '2026-09-27 17:59:06', 37),
-(9, 1, 0, 'Page 1', 'Test', '2026-09-28 02:09:15', 37);
+(2, 1, 0, 'Page 1', '# Test', '2026-10-14 08:42:19', 37);
 
 -- --------------------------------------------------------
 
@@ -74,14 +63,7 @@ CREATE TABLE `Cust_Pages_DATA` (
 
 INSERT INTO `Cust_Pages_DATA` (`Page_ID`, `Page_Iteration`, `Active`) VALUES
 (1, 1, 1),
-(2, 5, 1),
-(3, 1, 1),
-(4, 1, 1),
-(5, 1, 0),
-(6, 1, 1),
-(7, 1, 1),
-(8, 1, 1),
-(9, 1, 1);
+(2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -188,7 +170,7 @@ CREATE TABLE `SubMenus` (
 
 INSERT INTO `SubMenus` (`MenuID`, `LinkID`, `Page_ID`, `Menu_Entry`, `Title`, `Active`) VALUES
 (1, 1, 1, 'Home', 'index.php', 1),
-(1, 2, 9, 'Page 1', 'index.php?page=Page 1', 1);
+(1, 2, 2, 'Page 1', 'index.php?page=Page 1', 1);
 
 -- --------------------------------------------------------
 
@@ -233,17 +215,8 @@ CREATE TABLE `SubMenus_BACKUP` (
 --
 
 INSERT INTO `SubMenus_BACKUP` (`Page_ID`, `Page_Iteration`, `Menu_ID`, `Link_ID`, `Menu_Entry`, `Title`) VALUES
-(1, 1, 1, 1, 'Home', 'index.php'),
-(2, 1, 1, 2, 'Page 2', 'index.php?page=Page 2'),
-(2, 4, 1, 3, 'Page 2', 'index.php?page=Page 2'),
-(3, 1, 1, 3, 'Page 3', 'index.php?page=Page 3'),
-(4, 1, 1, 4, 'Page 4', 'index.php?page=Page 4'),
-(2, 5, 1, 5, 'Page 2.1', 'index.php?page=Page 2'),
-(5, 1, 1, 5, 'Page 5', 'index.php?page=Page 5'),
-(6, 1, 1, 6, 'Page 6', 'index.php?page=Page 6'),
-(7, 1, 1, 7, 'Page 7', 'index.php?page=Page 7'),
-(8, 1, 1, 9, 'Page8', 'index.php?page=Page8'),
-(9, 1, 1, 2, 'Page 1', 'index.php?page=Page 1');
+(1, 1, 1, 1, 'index.php', 'Home'),
+(2, 1, 1, 2, 'Page 1', 'index.php?page=Page 1');
 
 -- --------------------------------------------------------
 
@@ -305,7 +278,7 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`ID`, `First_Name`, `Last_Name`, `eMail`, `User_Name`, `Password`, `Activate_Pass`, `Change_Pass`, `Change_Pass_Expire`, `Forgot_Pass`, `Forgot_Pass_Expire`, `DateTime_Joined`, `Last_Logged`, `Authority_Level`, `Active`) VALUES
 (35, 'First_Name', 'Family_Name', 'jpinnoz@gmail.com', 'admin2', '$2y$10$eZK.6hAn.eqdDx1uuKU/tee4jzLRWzknnCgvsNN7DQh9rM20V4Zey', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-05-29 18:26:25', 3, 1),
-(37, 'First Name', 'Last Name', 'jpinnoz@yahoo.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$12$DqhUjYWqUHk/0QI0CB7m4.Xt0lR5tfY4zVUR/tHdusDD91JESt0TG', '2026-09-27 13:53:04', NULL, NULL, '2024-04-02 20:52:43', '2026-09-28 01:52:29', 3, 1);
+(37, 'First Name', 'Last Name', 'jpinnoz@yahoo.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$12$DqhUjYWqUHk/0QI0CB7m4.Xt0lR5tfY4zVUR/tHdusDD91JESt0TG', '2026-09-27 13:53:04', NULL, NULL, '2024-04-02 20:52:43', '2026-10-14 08:41:17', 3, 1);
 
 --
 -- Indexes for dumped tables
