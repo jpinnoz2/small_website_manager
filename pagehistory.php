@@ -31,8 +31,14 @@ if ( isset($_SESSION['first_name']) AND isset($_SESSION['user_name']) AND $_SESS
 		echo "<tr><th>Page Iteration</th><th>Parent Iteration</th><th>Page Title</th><th>Last Modified</th><th>Last Author</th><th>Active</th></tr>";
 		
 		for ($x=0; $x<count($test1); $x++) {
+			if (isset($test2[$x][0])) {
+				$test3 = $test2[$x][0];
+				//echo $test3;
+			} else {
+				$test3 = NULL;		
+			}
 			//echo $test1[$x][0].",".$test1[$x][1].",".$test1[$x][2].",".$test1[$x][3].",".$test1[$x]."<br>\r\n";
-			if ($test1[$x][0] == $test2[$x][0]) {
+			if ($test1[$x][0] == $test3) {
 				$pageName = preg_replace('/\s/', "_", $test1[$x][2]);
 				//echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?page=".$test1[$x][0]."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td><td>TRUE</td></tr>";			
 				echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?page=".$pageName."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td><td>TRUE</td></tr>";
