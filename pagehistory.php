@@ -41,7 +41,7 @@ if ( isset($_SESSION['first_name']) AND isset($_SESSION['user_name']) AND $_SESS
 			if ($test1[$x][0] == $test3) {
 				$pageName = preg_replace('/\s/', "_", $test1[$x][2]);
 				//echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?page=".$test1[$x][0]."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td><td>TRUE</td></tr>";			
-				echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?page=".$pageName."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td><td>TRUE</td></tr>";
+				echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?pageID=".$pageID."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td><td>TRUE</td></tr>";
 			} else {
 				echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?pageID={$pageID}&iteration=".$test1[$x][0]."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td><td>FALSE</td></tr>";
 			}

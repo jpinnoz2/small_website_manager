@@ -13,10 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submitCode']=="New_Page") {
 	$menuName = $_POST['fmenuName'];
 	$addToMenu = $_POST['faddToMenu'];
 	$title = $_POST['ftitle'];
-	$url1 = "index.php?page=".$title;
+	//$url1 = "index.php?page=".$title;
 	$pageTitle = preg_replace('/ /', '_', $title);
-	$url2 = "index.php?page=".$pageTitle;
-	$location = "Location: ".$url2;
+	//$url2 = "index.php?page=".$pageTitle;
+	
+	//$location = "Location: ".$url1;
 	$body = $_POST['fbody'];
 	
 	$query = "SELECT Cust_Pages.Title AS Title, Cust_Pages.Body AS Body FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Title='$title' AND Cust_Pages_DATA.Active=1;";
@@ -30,6 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submitCode']=="New_Page") {
 		$result = mysqli_query($cxn,$query);
 		$row = mysqli_fetch_assoc($result);
 		$maxID = $row['maxID']+1;
+		$url1 = "index.php?pageID=".$maxID;
+		$location = "Location: ".$url1;
 		$lastAuthor = $_SESSION['user_ID'];
 		
 		$query1 = "INSERT INTO `Cust_Pages` (`Title`, `Body`, `Page_ID`, `Page_Iteration`, `Last_Author`) VALUES ('$title','$body','$maxID','1','$lastAuthor')";

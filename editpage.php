@@ -37,9 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode'] == "Edit_Page"
 		$row3 = mysqli_fetch_assoc($result3);
 		$newLinkID = $row3['LargestID'] + 1;
 		
-		if (!$cxn -> query("UPDATE `SubMenus` SET `Title`='index.php?page=$newTitle', `Menu_Entry`='$menuEntry', Active=1 WHERE `Page_ID`='$pageID'")) {
+		if (!$cxn -> query("UPDATE `SubMenus` SET `Title`='index.php?pageID=$pageID', `Menu_Entry`='$menuEntry', Active=1 WHERE `Page_ID`='$pageID'")) {
 
-			$newMenuItem = "INSERT INTO `SubMenus`(`MenuID`, `LinkID`, `Page_ID`, `Menu_Entry`, `Title`) VALUES ('1','$newLinkID','$pageID','$menuEntry','index.php?page=$newTitle')";
+			$newMenuItem = "INSERT INTO `SubMenus`(`MenuID`, `LinkID`, `Page_ID`, `Menu_Entry`, `Title`) VALUES ('1','$newLinkID','$pageID','$menuEntry','index.php?pageID=$pageID')";
 			mysqli_query($cxn,$newMenuItem) or die ("Couldn't execute query.");
 		}
 		
@@ -56,7 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode'] == "Edit_Page"
 	}
 	
 	$pageTitle = preg_replace('/ /', '_', $newTitle);
-	$location = "Location: index.php?page=$pageTitle";
+	//$location = "Location: index.php?page=$pageTitle";
+	$location = "Location: index.php?pageID=$pageID";
 	header($location);
 	die();
 } else {
@@ -64,13 +65,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode'] == "Edit_Page"
 	$result1 ="";
 	$query1 ="";
 	if (isset($_SESSION['first_name']) AND isset($_SESSION['user_name']) AND $_SESSION['auth_lev']==3 ) {
-		if ($_GET['pageID'] && $_GET['iteration'] || $_GET['page']) {
-			if ($_GET['page']) {
+		if (isset($_GET['pageID'])) {
+			if (isset($_GET['pageID']) AND !isset($_GET['iteration'])) {
 				//echo "Test 1";
-				$handle = htmlspecialchars_decode($_GET["page"]);
-				$handle = preg_replace('/_/', ' ', $handle);
-
-				$query1 = "SELECT Cust_Pages.Title AS Title, Cust_Pages.Body AS Body, Cust_Pages.Page_ID AS Page_ID, Cust_Pages.Page_Iteration AS Page_Iteration, Cust_Pages.Last_Modified FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Title='$handle' AND Cust_Pages_DATA.Active=1;";
+				//$handle = htmlspecialchars_decode($_GET["page"]);
+				//$handle = preg_replace('/_/', ' ', $handle);
+				$query1 = "SELECT Cust_Pages.Title AS Title, Cust_Pages.Body AS Body, Cust_Pages.Page_ID AS Page_ID, Cust_Pages.Page_Iteration AS Page_Iteration, Cust_Pages.Last_Modified FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Cust_Pages_DATA.Page_ID={$_GET['pageID']} AND Cust_Pages_DATA.Active=1;";
+				
+				//$query1 = "SELECT Cust_Pages.Title AS Title, Cust_Pages.Body AS Body, Cust_Pages.Page_ID AS Page_ID, Cust_Pages.Page_Iteration AS Page_Iteration, Cust_Pages.Last_Modified FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Title='$handle' AND Cust_Pages_DATA.Active=1;";
 				
 				//echo $query1;
 				$result1 = mysqli_query($cxn,$query1);
@@ -82,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode'] == "Edit_Page"
 				$row3 = mysqli_fetch_assoc($result3);
 				$menuName = $row3['Menu_Entry'];
 				
-			} elseif ($_GET['pageID'] && $_GET['iteration']) {
+			} elseif (isset($_GET['pageID']) && isset($_GET['iteration'])) {
 			
 				$pageID = $_GET['pageID'];
 				$pageIteration = $_GET['iteration'];
@@ -102,7 +104,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode'] == "Edit_Page"
 			$result2 = mysqli_query($cxn,$query2);
 			$row2 = mysqli_fetch_assoc($result2);
 			$newPageIteration = $row2['Page_Iteration']+1;
-			$handle2 = "index.php?page=".$handle;
+			//$handle2 = "index.php?page=".$handle;
+			$handle2 = "index.php?pageID=".$_GET['pageID'];
 				
 			echo	"<h3>Edit Page</h3>\r\n
 			<form action='".htmlentities($_SERVER['PHP_SELF'])."' method=\"post\">\r\n
@@ -111,9 +114,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" AND $_POST['submitCode'] == "Edit_Page"
 			<tr><td>Add to Nav Bar?: </td><td><input type=\"checkbox\" id=\"faddToMenu\" name=\"faddToMenu\" checked ><label for=\"faddToMenu\">Check this if you want this Menu Title to be added to the Main Nav bar on the left</label></td></tr>\r\n
 			<tr><td>Page Title: </td><td><input type=\"text\" size=\"40\" value=\"{$row1['Title']}\" name=\"ftitle\"></input></td></tr>\r\n
 			<tr><td>Body: </td><td><textarea rows=5 cols=60 name=\"fbody\">{$row1['Body']}</textarea></td></tr>\r\n
-			</table>\r\n
-			<input type=\"hidden\" id=\"fOldTitle\" name=\"fOldTitle\" value=\"$handle\">\r\n
-			<input type=\"hidden\" id=\"fpage_ID\" name=\"fpage_ID\" value=\"{$row1['Page_ID']}\">\r\n
+			</table>\r\n";
+			//echo "<input type=\"hidden\" id=\"fOldTitle\" name=\"fOldTitle\" value=\"$handle\">\r\n";
+			echo "<input type=\"hidden\" id=\"fpage_ID\" name=\"fpage_ID\" value=\"{$row1['Page_ID']}\">\r\n
 			<input type=\"hidden\" id=\"fpageIteration\" name=\"fpageIteration\" value=\"$newPageIteration\">\r\n
 			<input type=\"hidden\" id=\"fparentIteration\" name=\"fparentIteration\" value=\"{$row1['Page_Iteration']}\">\r\n
 			<input type=\"hidden\" id=\"submitCode\" name=\"submitCode\" value=\"Edit_Page\">\r\n
