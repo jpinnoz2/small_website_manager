@@ -11,13 +11,14 @@ if ( isset($_SESSION['first_name']) AND isset($_SESSION['user_name']) AND $_SESS
 		
 		if ($_POST['Button'] == "Delete") {
 
-			$page = $_POST['page'];			
+			//$page = $_POST['page'];			
 			
 			//$query2 = "SELECT Thread_ID FROM Cust_Pages WHERE Title='$page' AND Active=1";
-			$query2 = "SELECT Cust_Pages_DATA.Page_ID FROM Cust_Pages_DATA LEFT JOIN Cust_Pages ON Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration AND Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID WHERE Cust_Pages.Title='$page' AND Cust_Pages_DATA.Active=1;";
-			$result2 = mysqli_query($cxn,$query2);
-			$row2 = mysqli_fetch_assoc($result2);
-			$pageID = $row2['Page_ID'];
+			//$query2 = "SELECT Cust_Pages_DATA.Page_ID FROM Cust_Pages_DATA LEFT JOIN Cust_Pages ON Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration AND Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID WHERE Cust_Pages.Title='$page' AND Cust_Pages_DATA.Active=1;";
+			//$result2 = mysqli_query($cxn,$query2);
+			//$row2 = mysqli_fetch_assoc($result2);
+			//$pageID = $row2['Page_ID'];
+			$pageID = $_POST['pageID'];			
 			
 			if ($pageID == 1) {
 				echo "<div class='error'>Cannot Delete Home Page. Edit instead.</div>";
@@ -39,19 +40,25 @@ if ( isset($_SESSION['first_name']) AND isset($_SESSION['user_name']) AND $_SESS
 			echo "<div class='message'>Page Deletion Canceled</div>";
 		}
 	
-	} elseif (isset($_GET['page'])) {
+	} elseif (isset($_GET['pageID'])) {
 	
-			$page = htmlspecialchars_decode($_GET['page']);
-			$page = preg_replace('/_/', ' ', $page);	
-			echo	"<h3>Delete Page \"$page\"</h3>\r\n
-			This will delete the page and remove it from the Nav Bar. The page can be restored later if you wish.<p>\r\n
-			<form action='".htmlentities($_SERVER['PHP_SELF'])."' method=\"post\">\r\n
-			<input type=\"hidden\" id=\"page\" name=\"page\" value=\"$page\">\r\n
-			<input type=\"hidden\" id=\"submitCode\" name=\"submitCode\" value=\"Delete_Page\">\r\n
-			<input type=\"submit\" name=\"Button\" value=\"Delete\" />\r\n
-			<input type=\"submit\" name=\"Button\" value=\"Cancel\" />\r\n
-			</form>\r\n";
-	
+			//$page = htmlspecialchars_decode($_GET['page']);
+			//$page = preg_replace('/_/', ' ', $page);
+			
+			$query = "SELECT Cust_Pages.Title AS Title FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Cust_Pages_DATA.Page_ID={$_GET['pageID']} AND Cust_Pages_DATA.Active=1;";
+			$result = mysqli_query($cxn,$query) or die ("Couldn't execute query.");
+			if ($row = mysqli_fetch_assoc($result)){
+				
+				$page = $row['Title'];						
+				echo	"<h3>Delete Page \"$page\"</h3>\r\n
+				This will delete the page and remove it from the Nav Bar. The page can be restored later if you wish.<p>\r\n
+				<form action='".htmlentities($_SERVER['PHP_SELF'])."' method=\"post\">\r\n
+				<input type=\"hidden\" id=\"pageID\" name=\"pageID\" value=\"{$_GET['pageID']}\">\r\n
+				<input type=\"hidden\" id=\"submitCode\" name=\"submitCode\" value=\"Delete_Page\">\r\n
+				<input type=\"submit\" name=\"Button\" value=\"Delete\" />\r\n
+				<input type=\"submit\" name=\"Button\" value=\"Cancel\" />\r\n
+				</form>\r\n";
+			}	
 	}
 	
 } else {

@@ -50,15 +50,18 @@ echo "<div class='message'>$message</div><p>\r\n";
 	$query = "SELECT Cust_Pages.Title AS Title, Cust_Pages.Body AS Body FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Title='$handle' AND Cust_Pages_DATA.Active=1;";
 */
 if (isset($_GET["pageID"]) AND !isset($_GET["iteration"])) {
+	$pageID = $_GET['pageID'];
 				//$query = "SELECT Cust_Pages_DATA.Page_ID FROM Cust_Pages_DATA INNER JOIN Cust_Pages ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Cust_Pages.Title='{$row['Title']}' AND Cust_Pages_DATA.Active=1;";
 				$query = "SELECT Cust_Pages.Title AS Title, Cust_Pages.Body AS Body FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Cust_Pages_DATA.Page_ID={$_GET['pageID']} AND Cust_Pages_DATA.Active=1;";
 } elseif (isset($_GET["pageID"]) AND isset($_GET["iteration"])) {
+	$pageID = $_GET['pageID'];
 	$query = "SELECT Title, Body FROM Cust_Pages WHERE Page_ID=".$_GET["pageID"]." AND Page_Iteration=".$_GET["iteration"]." ORDER BY Last_Modified DESC;";
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST" AND isset($_POST['ftitle'])) {
 	$handle = htmlspecialchars_decode($_POST["ftitle"]);
 	$handle = preg_replace('/_/', ' ', $handle);	
 	$query = "SELECT Cust_Pages.Title AS Title, Cust_Pages.Body AS Body FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Title='$handle' AND Cust_Pages_DATA.Active=1;";
 } else {
+	$pageID = 1;
 	//Set Title in Globals
 	//$query = "SELECT Title, Body FROM Cust_Pages WHERE Title=\"Welcome\" AND Active=1 ORDER BY Last_Modified DESC;";
 	$query = "SELECT Cust_Pages.Title AS Title, Cust_Pages.Body AS Body FROM Cust_Pages INNER JOIN Cust_Pages_DATA ON Cust_Pages_DATA.Page_ID=Cust_Pages.Page_ID AND Cust_Pages_DATA.Page_Iteration=Cust_Pages.Page_Iteration WHERE Cust_Pages_DATA.Page_ID=1 AND Cust_Pages_DATA.Active=1;";
@@ -111,7 +114,7 @@ if (isset($_SESSION['auth_lev'])){
 			echo "<a href='pagehistory.php?pageID={$row['Page_ID']}'>[History]</a>\r\n";
 		}
 		//echo "<a href='pagehistory.php?thread=6'>[History]</a>\r\n";
-		echo "<a href='deletepage.php?page=$pageTitle'>[Delete Page]</a>\r\n";
+		echo "<a href='deletepage.php?pageID=$pageID'>[Delete Page]</a>\r\n";
 		echo "</div>\r\n";
 		}
 	}
