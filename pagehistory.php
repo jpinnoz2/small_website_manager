@@ -62,10 +62,11 @@ if ( isset($_SESSION['first_name']) AND isset($_SESSION['user_name']) AND $_SESS
 			for ($x=0; $x<count($test1); $x++) {
 				//$row0['Page_Iteration'];
 				if ($x == $row0['Page_Iteration']-1) {
-					echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?pageID=".$pageID."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td>";
 					if ($active == TRUE) {
+						echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?pageID=".$pageID."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td>";
 						echo "<td>TRUE</td></tr>\r\n";
 					} else {
+						echo "<tr><td>".$test1[$x][0]."</td><td>".$test1[$x][1]."</td><td><a href=\"index.php?pageID={$pageID}&iteration=".$test1[$x][0]."\">".$test1[$x][2]."</a></td><td>".$test1[$x][3]."</td><td>".$test1[$x][4]."</td>";
 						echo "<td>FALSE</td></tr>\r\n";				
 					}
 				} else {
