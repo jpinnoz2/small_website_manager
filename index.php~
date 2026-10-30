@@ -114,7 +114,13 @@ if (isset($_SESSION['auth_lev'])){
 			echo "<a href='pagehistory.php?pageID={$row['Page_ID']}'>[History]</a>\r\n";
 		}
 		//echo "<a href='pagehistory.php?thread=6'>[History]</a>\r\n";
-		echo "<a href='deletepage.php?pageID=$pageID'>[Delete Page]</a>\r\n";
+		
+		if (isset($_GET['pageID'])) {
+			if (!isset($_GET['iteration'])) {
+				echo "<a href='deletepage.php?pageID=$pageID'>[Delete Page]</a>\r\n";
+			}		
+		}
+
 		echo "</div>\r\n";
 		}
 	}
