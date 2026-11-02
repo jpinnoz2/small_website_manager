@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 26, 2026 at 12:09 AM
+-- Generation Time: Nov 02, 2026 at 02:19 AM
 -- Server version: 11.8.6-MariaDB-0+deb13u1 from Debian
--- PHP Version: 8.4.26
+-- PHP Version: 8.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,12 +43,9 @@ CREATE TABLE `Cust_Pages` (
 
 INSERT INTO `Cust_Pages` (`Page_ID`, `Page_Iteration`, `Parent_Iteration`, `Title`, `Body`, `Last_Modified`, `Last_Author`) VALUES
 (1, 1, 0, 'Welcome', 'This is the homepage!', '2024-05-17 17:21:52', 35),
-(2, 1, 0, 'Page 1', '# Test', '2026-10-14 08:42:19', 37),
-(3, 1, 0, 'Page 2', 'Test', '2026-10-14 10:12:52', 37),
-(4, 1, 0, 'Page 1', '# Test', '2026-10-14 12:08:25', 37),
-(4, 2, 1, 'Page 1', '# Test\r\n# Test 2', '2026-10-26 10:28:22', 37),
-(5, 1, 0, 'Page 2', 'Test', '2026-10-26 11:04:45', 37),
-(6, 1, 0, 'Page 3', 'Test', '2026-10-26 11:07:47', 37);
+(1, 2, 1, 'Welcome', '# This is the homepage!', '2026-10-26 17:45:37', 37),
+(1, 3, 2, 'Welcome', 'This is the homepage!', '2026-10-30 09:08:16', 37),
+(2, 1, 0, 'Page 2', '# Test', '2026-11-02 13:15:22', 37);
 
 -- --------------------------------------------------------
 
@@ -67,12 +64,8 @@ CREATE TABLE `Cust_Pages_DATA` (
 --
 
 INSERT INTO `Cust_Pages_DATA` (`Page_ID`, `Page_Iteration`, `Active`) VALUES
-(1, 1, 1),
-(2, 1, 0),
-(3, 1, 0),
-(4, 2, 0),
-(5, 1, 1),
-(6, 1, 1);
+(1, 3, 1),
+(2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -168,7 +161,7 @@ CREATE TABLE `SubMenus` (
   `MenuID` int(11) NOT NULL,
   `LinkID` int(11) NOT NULL,
   `Page_ID` int(11) NOT NULL DEFAULT 0,
-  `Menu_Entry` varchar(20) NOT NULL,
+  `Menu_Entry` varchar(50) NOT NULL,
   `Title` varchar(500) NOT NULL,
   `Active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -179,8 +172,7 @@ CREATE TABLE `SubMenus` (
 
 INSERT INTO `SubMenus` (`MenuID`, `LinkID`, `Page_ID`, `Menu_Entry`, `Title`, `Active`) VALUES
 (1, 1, 1, 'Home', 'index.php', 1),
-(1, 5, 5, 'Page 2', 'index.php?pageID=5', 1),
-(1, 6, 6, 'Page 3', 'index.php?pageID=6', 1);
+(1, 2, 2, 'Page 2', 'index.php?pageID=2', 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +208,7 @@ CREATE TABLE `SubMenus_BACKUP` (
   `Page_Iteration` int(11) NOT NULL,
   `Menu_ID` int(11) NOT NULL,
   `Link_ID` int(11) NOT NULL,
-  `Menu_Entry` varchar(20) NOT NULL,
+  `Menu_Entry` varchar(50) NOT NULL,
   `Title` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -225,13 +217,8 @@ CREATE TABLE `SubMenus_BACKUP` (
 --
 
 INSERT INTO `SubMenus_BACKUP` (`Page_ID`, `Page_Iteration`, `Menu_ID`, `Link_ID`, `Menu_Entry`, `Title`) VALUES
-(1, 1, 1, 1, 'index.php', 'Home'),
-(2, 1, 1, 2, 'Page 1', 'index.php?page=Page 1'),
-(3, 1, 1, 3, 'Page 2', 'index.php?page=Page 2'),
-(4, 1, 1, 4, 'Page 1', 'index.php?page=Page 1'),
-(4, 2, 1, 5, 'Page 1', 'index.php?page=Page 1'),
-(5, 1, 1, 5, 'Page 2', 'index.php?pageID=5'),
-(6, 1, 1, 6, 'Page 3', 'index.php?pageID=6');
+(1, 1, 1, 1, 'Home', 'index.php'),
+(2, 1, 1, 2, 'Page 2', 'index.php?pageID=2');
 
 -- --------------------------------------------------------
 
@@ -293,7 +280,7 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`ID`, `First_Name`, `Last_Name`, `eMail`, `User_Name`, `Password`, `Activate_Pass`, `Change_Pass`, `Change_Pass_Expire`, `Forgot_Pass`, `Forgot_Pass_Expire`, `DateTime_Joined`, `Last_Logged`, `Authority_Level`, `Active`) VALUES
 (35, 'First_Name', 'Family_Name', 'jpinnoz@gmail.com', 'admin2', '$2y$10$eZK.6hAn.eqdDx1uuKU/tee4jzLRWzknnCgvsNN7DQh9rM20V4Zey', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$10$Yr34a2gba0mWN9BJMKme.e5vx.Z8Bdw.L2lqrGvqc75atvCBphUCq', '2024-04-30 16:48:43', NULL, NULL, '2024-04-02 20:52:43', '2024-05-29 18:26:25', 3, 1),
-(37, 'First Name', 'Last Name', 'jpinnoz@yahoo.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$12$DqhUjYWqUHk/0QI0CB7m4.Xt0lR5tfY4zVUR/tHdusDD91JESt0TG', '2026-09-27 13:53:04', NULL, NULL, '2024-04-02 20:52:43', '2026-10-26 10:28:09', 3, 1);
+(37, 'First Name', 'Last Name', 'jpinnoz@yahoo.com', 'admin', '$2y$10$giFVXqze/eqqXGlaG.c7aek30lN/5PWljqx..MouWCO9QdcRcX/1u', '$2y$10$BFBfu5lIRrr5oYVouelvO.XYfxGx3vQVj2ZCNut1yRNtKdwOck6Nq', '$2y$12$DqhUjYWqUHk/0QI0CB7m4.Xt0lR5tfY4zVUR/tHdusDD91JESt0TG', '2026-09-27 13:53:04', NULL, NULL, '2024-04-02 20:52:43', '2026-11-02 13:14:08', 3, 1);
 
 --
 -- Indexes for dumped tables
@@ -355,7 +342,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Cust_Pages`
 --
 ALTER TABLE `Cust_Pages`
-  MODIFY `Page_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Page_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `News`
@@ -373,7 +360,7 @@ ALTER TABLE `News_Comments`
 -- AUTO_INCREMENT for table `SubMenus_Modules`
 --
 ALTER TABLE `SubMenus_Modules`
-  MODIFY `SubMenu_Order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `SubMenu_Order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `Users`
